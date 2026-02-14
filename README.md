@@ -18,7 +18,6 @@ A través de este análisis, se busca entender cómo los clientes consumen servi
 
 ## Estructura de los Datos
 El análisis se basa en tres conjuntos de datos principales:
-
 1.  **`plans.csv`**: Configuración de los planes (Básico y Premium), incluyendo precios mensuales, minutos/GB incluidos y tarifas por excedentes.
 2.  **`users_latam.csv`**: Perfil demográfico de 4,000 clientes (edad, ciudad, fecha de registro, plan y fecha de baja).
 3.  **`usage.csv`**: 40,000 registros de uso real (llamadas y mensajes) con duración y marcas de tiempo.
@@ -28,6 +27,11 @@ El análisis se basa en tres conjuntos de datos principales:
 ## Proceso de Análisis (Pipeline)
 
 ### 1. Exploración Inicial
+Originalmente, los datos presentaban inconsistencias que habrían sesgado cualquier decisión de negocio si no se trataban:
+* Identidad y Edad: Se detectó un valor "sentinel" (-999) en la columna age. Aunque era una sola etiqueta, afectaba el promedio general.
+* Ubicación: La columna city tenía un 11.73% (469 filas) de valores nulos o representados por un "?", lo que impedía un análisis regional preciso.
+* Fugas de Datos (Churn): La columna churn_date tenía un 88.35% (3,534 filas) de nulos. Lejos de ser un error, se identificó que representan a los clientes activos, revelando una tasa de retención saludable pero que requiere monitoreo.
+* Anomalías Temporales: Se encontraron registros con fechas en el año 2026 (fechas futuras), lo que representaba un error de captura que fue saneado para mantener el análisis dentro del periodo 2024.
 Se realizó un diagnóstico de la calidad de los datos detectando:
 * Tipos de datos incorrectos en columnas de fecha.
 * Presencia de valores centinela (como `-999` en edad).
