@@ -25,7 +25,7 @@ El análisis se basa en tres conjuntos de datos principales:
 
 ---
 
-## ⚙️ Proceso de Análisis (Pipeline)
+## Proceso de Análisis (Pipeline)
 
 ### 1. Exploración Inicial
 Se realizó un diagnóstico de la calidad de los datos detectando:
